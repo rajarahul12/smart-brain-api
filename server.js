@@ -13,7 +13,7 @@ var image=require('./controllers/image');
 const db=knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
+    host : 'postgresql-concentric-33850',
     user : 'postgres',
     password : 'rahul123',
     database : 'smart-brain'
