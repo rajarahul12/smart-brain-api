@@ -13,10 +13,8 @@ var image=require('./controllers/image');
 const db=knex({
   client: 'pg',
   connection: {
-    host : 'postgresql-concentric-33850',
-    user : 'postgres',
-    password : 'rahul123',
-    database : 'smart-brain'
+    host : process.env.DATABASE_URL,
+    ssl:true,
   }
 });
 
