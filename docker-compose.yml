@@ -1,0 +1,43 @@
+version: "3.6"
+
+services:
+  #Backend api
+  smart-brain-api:
+    container_name: backend
+    build: ./
+    volumes:
+      - ./:/usr/src/smart-brain-api
+    command: npm start
+    working_dir: /usr/src/smart-brain-api
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_URI: postgres://postgres:rahul123@postgres:5432/smart-brain-api
+      REDIS_URI: redis://redis:6379
+      # POSTGRES_USER: postgres
+      # POSTGRES_PASSWORD:
+      # POSTGRES_DB: smart-brain
+      # POSTGRES_HOST: postgres
+      # Instead of using these we can use a single POSTGRES_URI
+
+    # links:
+    #   - postgres
+
+  #Postgres
+  postgres:
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: rahul123
+      POSTGRES_DB: smart-brain-api
+      POSTGRES_HOST: postgres
+      POSTGRES_URI: postgres://postgres:rahul123@postgres:5432/smart-brain-api
+    build: ./postgres
+    ports:
+      - "5432:5432"
+
+  #Redis
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
